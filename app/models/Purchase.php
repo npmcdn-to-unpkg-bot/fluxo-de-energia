@@ -19,4 +19,8 @@ class Purchase extends Eloquent {
     function farmer() {
         return $this->belongsTo('Farmer');
     }
+
+    function fruits() {
+    	return $this->hasMany('Fruit');
+    }
 } 
