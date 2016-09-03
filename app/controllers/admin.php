@@ -38,19 +38,25 @@ class admin extends \BaseController {
 
 		    	// ->> CHANGED THIS to saving a column in user database.
 #Target -
-#ajax request - Done
 // ->DISCARD # Sessions - done => stored user_id & active character
 # decayHandle - Done
 # thresholdHandle -Done
-# makeInvestment
-# >Make forms for Product class (exclude necessary paras)
-# >Makeinvestment function.
+# >Make forms for Product class  (exclude necessary paras) -Done
+
+# >Makeinvestment function. - Done, but not debugged for complex
+
 # >Make similar for fruit price setting
+
+#ajax for Decay & LE  - Done => but updates shown only at home page. We need it AT EVERY PAGE THEY ARE ON.
+
 # >Ajax for bid price !	
-# > CHANGING CHARACTER THR CHeck   
+#> Ajax to update FT & GT. also do this inside makeInvestment
+# >Ajax  CHANGING CHARACTER THR Check   
+
+
 # >Land mini game -> returning land blocks array.
 
-    	// $k=Config::get('game.catTables');	 $le = $k[$active_cat]::where('user_id',$id)->first()->le;
+  // $k=Config::get('game.catTables');	 $le = $k[$active_cat]::where('user_id',$id)->first()->le;
 
 
     	// if(!Session::has('prev_time')){ //first time

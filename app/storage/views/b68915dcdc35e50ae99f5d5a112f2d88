@@ -53,7 +53,6 @@ setInterval(function(){
     <input type='number' id='sysLE' value=0 />
 <!-- Returned data from server -->
 <br>
-Body of Home<br>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

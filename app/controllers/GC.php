@@ -69,6 +69,8 @@ class GC extends \BaseController {
 		}
 	}
 
+
+
 	public function createProduct(){
 		//from POST request by God
 		$input = Input::except('_token');			// unset($input['_token']);
@@ -82,7 +84,7 @@ class GC extends \BaseController {
 				$p->being_funded=1;
 				foreach(array_keys($input) as $field){
 					//ADD CONDN to ensure column exists in 
-					
+
 					$p->$field=$input[$field]; 				// if(property_exists($p,$field))
 					echo $field." -> ".$input[$field];
 					if($p->$field)echo " added.";echo "<br>";			
@@ -98,15 +100,3 @@ class GC extends \BaseController {
 		else return "You are not God!";
 	} 
 }	
-
-#*** 		EACH FUNCTION SHALL ADD AN IF CONDN TO CHECK IF USER IS GOD/FARMER/INV
-#Target -
-#ajax request - Done
-# Sessions - done => stored user_id & active character
-# decayHandle - Done
-# >Make forms for Product class - Done
-# > buyProduct function
-# >Makeinvestment function.
-# >Make similar for fruit price setting
-    	// $k=Config::get('game.catTables');	 $le = $k[$active_cat]::where('user_id',$id)->first()->le;
-    	//$curr_log->created_at->diffInSeconds($last_log->created_at);

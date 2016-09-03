@@ -44,16 +44,18 @@ echo "<BR><BR><BR><BR>";
 		$input = Input::all();
 		$user = Auth::user()->get();
 		//CONDN
+if($user->farmer)
+	{
 		$farmer = $user->farmer; // opens farmer cat of user, ADD CONDITION ABOVE
 		
 		$prod=Product::find($input['product_id']);
 		$num = $input['num'];
-
+	
 		$god = $prod->god;
 		$curr_bid_price = $prod->bid_price;
 		$prod_price	=$num * $curr_bid_price;
-
-
+	
+	
 		$farmer->le -= $prod_price;
 		$prod->num_units-=$num;
 		$prod->save();
@@ -67,12 +69,12 @@ echo "<BR><BR><BR><BR>";
 			$inv->le+= $percentage * $prod_price;
 			$inv->save();
 		}
-
+	
 		$god->le += Config::get('game.godPercent') * $prod_price;
 		$god->save();
-
-
+	
+	}
 		
-	} 
+} 	
 	
 }

@@ -11,8 +11,11 @@ class UC extends \BaseController {
 
 	public function logout(){
 		$user= Auth::user()->get();
-		echo $user->username;
-		Auth::user()->logout();
+		if($user){
+			echo $user->username." logged out";
+			Auth::user()->logout();	
+		}
+		else echo "Already logged out <BR>".Config::get('debug.login');
 
 	}
 
