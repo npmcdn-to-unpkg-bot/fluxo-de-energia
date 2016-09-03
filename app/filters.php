@@ -46,6 +46,13 @@ Route::filter('auth.user', function() {
     }
 });
 
+Route::filter('investor', function() {
+    $user= Auth::user()->get();
+    if ($user->category!='investor') {
+        return "Not allowed";
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

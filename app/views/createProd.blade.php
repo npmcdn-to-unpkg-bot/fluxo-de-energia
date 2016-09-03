@@ -28,11 +28,11 @@
 
 
 //check syntax & ids here-
-$('.MySliders').change(
+$('.MySliders').change(function(){
 
     $('#unitPrice').val(getUC());
 
-    );
+});
 
 
 </script>
@@ -48,10 +48,10 @@ $('.MySliders').change(
     <label>num_units: <input type='number' name='num_units' value=100 /></label><br>
     <label>name: <input type='text' name='name' value="prod" /></label><br>
     <label>TYPE: <select name='category'>
-       <option value="fertilizer"> Fertilizer</option>
-       <option value="seed"> Seed</option>
-       <option value="land"> Land</option>
-   </select>
+     <option value="fertilizer"> Fertilizer</option>
+     <option value="seed"> Seed</option>
+     <option value="land"> Land</option>
+ </select>
 </label><br>
 <label>description: <input type='text' name='description' value="desc" /></label><br>
 

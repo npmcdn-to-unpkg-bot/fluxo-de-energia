@@ -25,6 +25,10 @@ class IC extends \BaseController {
 	}
 }
 
+public function testFilter(){
+$user=Auth::user()->get();
+echo $user->category;
+}
 
 
 public function buyFruit(){

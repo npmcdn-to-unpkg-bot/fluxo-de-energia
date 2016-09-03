@@ -23,6 +23,8 @@ Route::get('/testfn', ['as' => 'testfn', 'uses' => 'FC@testfn']);
 
 Route::get ('/boost', ['as' => 'boostLE', 'uses' => 'admin@boostLE']);
 
+Route::get('/testFilter', ['as'=> 'testFilter','before' => 'investor', 'uses' => 'IC@testFilter']);
+
 
 Route::get('/login/{id?}', ['as' => 'login', 'uses' => 'UC@login']);
 Route::get('/logout', ['as' => 'logout', 'uses' => 'UC@logout']);

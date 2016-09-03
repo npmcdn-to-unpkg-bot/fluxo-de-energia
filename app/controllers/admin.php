@@ -37,14 +37,12 @@ class admin extends \BaseController {
 
 //USER MIDDLEWARE for checking it is a farmer & all.
 
-#*** Admin Panel REQUIRED => the decay/FT/ET will still go on due to timestamp stuff in case server stops !
+#*** Admin Panel REQUIRED  boostLE/reset FT(time_when_created+= time passed) => the decay/FT/ET will still go on due to timestamp stuff in case server stops !
 
 
 		    	// ->> CHANGED THIS to saving a column in user database.
 #Target -
 // ->DISCARDED # Sessions - done => stored user_id & active character
-# decayHandle - Done
-# thresholdHandle -Done
 # >Make forms for Product class  (exclude necessary paras) -Done
 
 # >Makeinvestment function. - Done, but not debugged for complex
@@ -52,8 +50,10 @@ class admin extends \BaseController {
 # >Make similar for fruit price setting
 # > buy fruit
 
-#ajax for Decay & LE  - Done => but We need it AT EVERY PAGE THEY ARE ON currently  updates shown only at home page. .
+#ajax for Decay & LE  - Done => but add it to master.
 
+# thresholdHandle -Done
+# decayHandle - Done
 # >Ajax for bid price? -> IMPLEMENT NOW 	
 #> Ajax to update FT & GT. also do this inside makeInvestment
 # >Ajax  CHANGING CHARACTER THR Check   
