@@ -36,7 +36,7 @@ public function check($investor,$input){
 	if(!$p)return false;
 	if(!$p->FT){echo "FT is over. ";return false;}
 
-	if($p->avl_shares < (int)$input['num_shares']){ echo "Insufficient shares. "; return false;}
+	if($p->avl_shares < (int)$input['num_shares']){ echo "Insufficient shares. Try reducing number of shares. (".$p->avl_shares.")"; return false;}
 	else {
 		$p->avl_shares -= (int)($input['num_shares']);
 		$p->save();
@@ -58,7 +58,7 @@ public function check($investor,$input){
 				$investor->save();
 				return true;
 			}
-			else {echo "Insufficient LE. ";return false;}
+			else {echo $THR." >  ".$LE."-".$price." - > Insufficient LE. ";return false;}
 		}
 	}
 
@@ -71,10 +71,11 @@ public function check($investor,$input){
 		$input = Input::except('_token');
 		$user= Auth::user()->get();
 		//investor id,bid_price, set at backend
-		//THIS IS NOT ECHOING STUFF?
 
 		if($user->investor){
 			$investor=$user->investor;
+			echo "Current LE = ".$investor->le."<BR>";
+
 			if($this->check($investor,$input)){ //THIS WILL ALREADY REDUCE LE, make sure the product gets Added
 				$i=new Investment();
 				$i->investor_id = $investor->id;
@@ -86,28 +87,18 @@ public function check($investor,$input){
 					if($i->$field)echo " added.";echo "<br>";			
 				}
 				$i->save();	
-				echo "Success";
+				echo "Success. Now LE = ".$investor->le;
 			}
-			else echo "Transaction failed. Try reducing number of shares.";
+			else echo "<BR>Transaction failed. ";
 		}
 	} 
 	
 	public function makeInvestmentForm(){
 		$user= Auth::user()->get();
 		if(!$user)return Config::get('debug.login');
-		if($user->category=='investor')return View::make('invest')->with('user',$user);
+		if($user->category=='investor'){
+			return View::make('invest')->with('user',$user);
+		}
 		else return "You are not Investor!";
 	} 
 }	
-
-#*** 		EACH FUNCTION SHALL ADD AN IF CONDN TO CHECK IF USER IS GOD/FARMER/INV
-#Target -
-#ajax request - Done
-# Sessions - done => stored user_id & active character
-# decayHandle - Done
-# >Make forms for Product class - Done
-# > buyProduct function -
-# >Makeinvestment function. -Done => might have some bugs.
-# >Make similar for fruit price setting
-    	// $k=Config::get('game.catTables');	 $le = $k[$active_cat]::where('user_id',$id)->first()->le;
-    	//$curr_log->created_at->diffInSeconds($last_log->created_at);
