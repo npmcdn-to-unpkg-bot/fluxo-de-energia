@@ -33,7 +33,6 @@ class AmoghController extends \BaseController {
 		}
 	}
 
-
 	public function plantSeed(){
 		$plant = new Fruit;
 		$plant->purchase_id = Input::get('seed');
@@ -44,8 +43,8 @@ class AmoghController extends \BaseController {
 		$plant->in_progress = 1;
 		$plant->plant_time = time();
 		$plant_product = $plant->purchased_seed->product;
-		$plant->storage_le = $plant_product->unit_price * $plant_product->quality;
-		$plant->unit_price = dosomething(); //calculate the unit_price
+		$plant->unit_price = dosomething(quality,et); //calculate the unit_price
+		$plant->storage_le = $plant->unit_price * $plant_product->quality;
 		$plant->growth_factor = $plant->purchased_fertilizer->product->quality + $plant->purchased_land->product->quality;
 		$plant->save();
 		$land = $plant->purchased_land;
@@ -69,6 +68,31 @@ class AmoghController extends \BaseController {
 		$fruit->save();
 	}
 
+	public function buyFruit(){
+		$fruit = Fruit::find(Input::get('fruit'));
+		if(Auth::user()->get()->category != 'investor')
+			return "Not authorised";
+		$investor = Auth::user()->get()->investor;
+		$sp = dosomething()  //find the selling price
+		$investor->le -= $sp;
+		$investor->stored_le += $fruit->stored_le;
+		$farmer = $fruit->purchased_seed->farmer;
+		$farmer->le += $sp;
+		$investor->save();
+		$farmer->save();
+		$fruit->delete();
+ 	}
 
+ 	public function redeemLife(){
+ 		if(Auth::user()->get()->category != 'investor')
+			return "Not authorised";
+ 		$investor = Auth::user()->get()->investor;
+ 		$redeem = Input::get('redeem');
+ 		if($redeem > $investor->storage_le)
+ 			return "Insufficient supply of Life Energy";
+ 		$investor->le += $redeem;
+ 		$investor->storage_le -= $redeem;
+ 		$investor->save();
+ 	}
 
 }
