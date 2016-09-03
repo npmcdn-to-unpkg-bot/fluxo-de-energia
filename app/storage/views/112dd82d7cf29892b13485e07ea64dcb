@@ -1,0 +1,13 @@
+<head>
+<script type="text/javascript" src="<?php echo URL::asset('js/jquery.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo URL::asset('js/bootstrap.min.js'); ?>"></script>
+<link rel="stylesheet" src="<?php echo URL::asset('bootstrap/css/bootstrap.css'); ?>"/>
+<?php echo $__env->yieldContent('headContent'); ?>
+</head>
+
+<body>
+Body of master
+<?php echo $__env->yieldContent('bodyContent'); ?> 
+<!-- //this is like a {%block %} with {% endblock %} -->
+	
+</body>

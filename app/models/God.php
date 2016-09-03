@@ -26,5 +26,10 @@ class God extends Eloquent implements UserInterface {
         return $this->hasMany('Product');
     }
 
+ //    function name(){
+	// 	$user= User::find($this->user_id);
+	// 	return $user->username;
+	// }
+
 
 } 

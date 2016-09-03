@@ -10,7 +10,7 @@ class Farmer extends Eloquent {
         return $this->belongsTo('User');
     }
 
-    function purchase() {
+    function purchases() {
         return $this->hasMany('Purchase');
     }
 

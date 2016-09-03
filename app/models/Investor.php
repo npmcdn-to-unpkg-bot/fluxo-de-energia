@@ -20,10 +20,16 @@ class Investor extends Eloquent implements UserInterface {
 
 	function user() {
 		return $this->belongsTo('User');
+		//UName  = $inv->user->username;
 	}
 
 	function investments() {
 		return $this->hasMany('Investment');
 	}
+
+	function products(){
+        return $this->belongsToMany('Product','investments')->withPivot('bid_price','num_shares');
+	}
+	
 
 } 

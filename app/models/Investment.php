@@ -13,10 +13,21 @@ class Investment extends Eloquent {
 
     public $timestamps = true;
 
+
+
     function product() {
         return $this->belongsTo('Product');
     }
     function investor() {
         return $this->belongsTo('Investor');
     }
+
+//ONLY RELATIONS HERE   ( Or scopes also>) 
+	// function inv(){
+	// 	return $this->investor->name;
+	// }
+	// function prod(){
+	// 	return $this->product->category;
+	// }
+
 } 

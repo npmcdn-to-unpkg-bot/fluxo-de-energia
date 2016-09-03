@@ -1,0 +1,21 @@
+<?php $__env->startSection('bodyContent'); ?>
+<br>
+<pre>
+<?php echo Form::open(array('url' => route("makeInvestment"))); ?>
+
+
+All Fields are required : 
+    <label>num_shares : <input type='number' name='num_shares' value=10 /></label><br>
+    <label>PRODUCT: <select name='product_id'>
+	<option value="110"> Fertilizer1</option>
+	<option value="108"> Seed2</option>
+</select>
+    </label><br>
+    <input type='submit' value="SAVE" />
+<?php echo Form::close(); ?>
+
+</pre>
+<br>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
