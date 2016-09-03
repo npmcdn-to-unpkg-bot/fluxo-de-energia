@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<title>
+  FARMER
+</title>
+<html lang="en">
+
+<head>
+<script>
+      function insertTable(cellData,divID){
+
+        var start=0;
+        var tableContainer=document.getElementById(divID);
+        var table1= document.createElement('table');
+        table1.className="table table-bordered";
+        var tableHeight=cellData.length-start,tableWidth=cellData[start+1].length;
+
+        for(var i=start;i<tableHeight;i++){
+          var current_row=table1.insertRow();
+          if(i==start)current_row.style="background:black;color:white";
+          for(var j=0; j<tableWidth;j++){
+            var current_col=current_row.insertCell();
+            current_col.innerHTML='<strong>'+cellData[i%tableHeight][j%tableWidth]+'</strong>';
+          }
+        }
+        tableContainer.appendChild(table1);
+      }
+
+    </script>
+
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Simple Tables</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="D:/AdminLTE-2.3.6/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">    
+  <!-- Theme style -->
+  <link rel="stylesheet" href="D:/AdminLTE-2.3.6/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+  folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="D:/AdminLTE-2.3.6/dist/css/skins/_all-skins.min.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+         <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://pagead2.googlesyndication.com/pub-config/r20160601/ca-pub-4495360934352473.js"></script>
+  </head>
+  <body style="background:#ffe699" >
+    <span class="info-box-icon bg-yellow"><div><i class="fa fa-fw fa-user"></i></div></span>
+    <div class="info-box bg-red" style="width:45%;margin:0%0%0%8%">
+      <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">System Life Energy</span>
+        <span class="info-box-number">92,050</span>
+
+        <div class="progress">
+          <div class="progress-bar" style="width: 20%"></div>
+        </div>
+        <span class="progress-description">
+          10% decrease per minute
+        </span>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+
+    <div class="info-box bg-yellow" style="width:45%;margin:-7.4%0%5%54%">
+      <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-text">Own Life Energy</span>
+        <span class="info-box-number">92,050</span>
+
+        <div class="progress">
+          <div class="progress-bar" style="width: 20%"></div>
+        </div>
+        <span class="progress-description">
+          10% decrease per minute
+        </span>
+      </div>
+    </div>
+
+    <div style="width:40%;background:#ffc61a;margin:-5%-20%3%2%;border-radius:10px">
+      <div class="box-header with-border" style="margin:0%50%0%0%">
+        <h3 class="box-title">Seed Menu</h3>
+      </div>
+      <div class="box-body" id="SeedTable"></div>
+    </div>
+
+  </div>
+    <!-- /.info-box-content -->
+  <div id="productLaunched" style="width:70%;background:#ffc61a;margin:0%-20%10%2%;border-radius:10px">
+    <div class="box-header with-border" style="margin:0%50%0%0%">
+      <h3 class="box-title">product launched</h3>
+    </div>
+    <!-- /.box-header -->
+    
+      <script>insertTable(cellData,"productLaunched");</script>
+
+
+  <div class="info-box" style="width:22%;background:#ffc266;margin:-28%50%10%75%">
+    <span class="info-box-icon bg-aqua"><div><i class="fa fa-fw fa-user-secret"></i></div></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Threshold for God</span>
+      <span class="info-box-number">90<small>%</small></span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+  <div class="info-box" style="width:22%;background:#ffc266;margin:-8%50%10%75%">
+    <span class="info-box-icon bg-green"><div><i class="fa fa-fw fa-users"></i></div></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Threshold for Investor</span>
+      <span class="info-box-number">90<small>%</small></span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+
+  <div id="Bazar" style="width:50%;background:#ffc61a;margin:-22%-20%3%45%;border-radius:10px">
+    <div class="box-header with-border" style="margin:0%50%0%0%">
+      <h3 class="box-title">Bazar</h3>
+    </div>
+    <!-- /.box-header -->
+    
+  <div class="col-md-4" style="width:70%;background:#ffc61a;margin:2%0%5%2%;border-radius:10px">
+    <p class="text-center">
+      <strong>farmer Stats</strong>
+    </p>
+    <div class="progress-group">
+      <span class="progress-text">farmer1</span>
+      <span class="progress-number"><b>160</b>/200</span>
+
+      <div class="progress sm">
+        <div class="progress-bar progress-bar-green" style="width: 50%"></div>
+      </div>
+    </div>
+    <div class="progress-group">
+      <span class="progress-text">farmer2</span>
+      <span class="progress-number"><b>160</b>/200</span>
+
+      <div class="progress sm">
+        <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+      </div>
+    </div>
+    <!-- /.progress-group -->
+    <div class="progress-group">
+      <span class="progress-text">farmer3</span>
+      <span class="progress-number"><b>310</b>/400</span>
+
+      <div class="progress sm">
+        <div class="progress-bar progress-bar-green" style="width: 30%"></div>
+      </div>
+    </div>
+    <!-- /.progress-group -->
+    <div class="progress-group">
+      <span class="progress-text">farmer4</span>
+      <span class="progress-number"><b>480</b>/800</span>
+
+      <div class="progress sm">
+        <div class="progress-bar progress-bar-green" style="width: 60%"></div>
+      </div>
+    </div>
+    <!-- /.progress-group -->
+  </div>
+  <div class="small-box bg-yellow" style="width:20%;margin:10%0%0%75%">
+    <div class="inner">
+      <h3>150</h3>
+
+      <p>profit gained</p>
+    </div>
+    <div class="icon">
+      <i class="fa fa-shopping-cart"></i>
+    </div>
+  </div>
+
+
+  <div class="box box-danger">
+    <div class="box-header with-border">
+      <h3 class="box-title">Donut Chart</h3>
+
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <div class="box-body chart-responsive">
+      <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+    </div>
+    <!-- /.box-body -->
+  </div>
+    <script type="text/javascript">
+      var cellData=[
+      ['#','Seed','Price','Growth time'],
+      ['1.','seed1','-','-'],
+      ['2.','seed2','-','-'],
+      ['3.','seed3','-','-'],
+      ['4.','seed4','-','-'],
+      ['5.','seed5','-','-'],
+      ] ;
+      var cellData2=[
+      ['#','product','name','Price','units','quality','bid price','expiry','description'],
+      ['1.','product','-','0', '-' ,'150000', '3000','per', 'unit'],
+      ['2.','product','-','0', '-' ,'150000', '3000','per', 'unit'],
+      ['3.','product','-','0', '-' ,'150000', '3000','per', 'unit'],
+      ['4.','product','-','0', '-' ,'150000', '3000','per', 'unit'],
+      ] ;
+      var cellData3=[
+      ['#','fruits',  'quantity',  'detail',  'price', 'energy stored'],
+      ['1.',  'Apple', '50',  '-', '3000 per unit', '-'],
+      ['1.',  'Mango', '80',  '-', '3000 per unit', '-'],
+      ['1.',  'grapes',  '90',  '-', '3000 per unit', '-'],
+      ['1.', 'banana',  '20',  '-', '3000 per unit', '-'],
+      ];
+      insertTable(cellData,"SeedTable");
+      insertTable(cellData2,"productLaunched");
+      insertTable(cellData3,"Bazar");
+
+
+</script>
+  <script src="D:/AdminLTE-2.3.6/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="D:/AdminLTE-2.3.6/bootstrap/js/bootstrap.min.js"></script>
+  <!-- Morris.js charts -->
+  <script src="raphael.js"></script>
+  <script src="D:/AdminLTE-2.3.6/plugins/morris/morris.min.js"></script>
+  <!-- FastClick -->
+  <script src="D:/AdminLTE-2.3.6/plugins/fastclick/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script src="D:/AdminLTE-2.3.6/dist/js/app.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="D:/AdminLTE-2.3.6/dist/js/demo.js"></script>
+  <script>
+    var donut = new Morris.Donut({
+      element: 'sales-chart',
+      resize: true,
+      colors: ["#3c8dbc", "#f56954", "#00a65a"],
+      data: [
+      {label: "Download Sales", value: 12},
+      {label: "In-Store Sales", value: 30},
+      {label: "Mail-Order Sales", value: 20}
+      ],
+      hideHover: 'auto'
+    });
+  </script>
+</body>
