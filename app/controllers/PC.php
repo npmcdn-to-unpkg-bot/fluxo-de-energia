@@ -2,6 +2,8 @@
 
 class PC extends \BaseController {
 
+//this contains FUNDING DATA 
+    //ORDER THEM BY PRODUCT PRICE
 	public function listFunds(){
     	$investors = Investor::all(); //investments function is defined in the model.
     	foreach ($investors as $investor) {
@@ -24,7 +26,7 @@ class PC extends \BaseController {
                 echo " ";
                 echo $inv->product->description;
                 echo " ";
-    			echo $inv->num_shares * $inv->bid_price;
+    			echo $inv->num_shares * $inv->bid_priceo;
                 echo "<br>";
             }
 			echo "<br>";

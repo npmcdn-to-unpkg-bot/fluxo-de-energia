@@ -2,9 +2,9 @@
 // NOTE : config/session.php => CHANGED expire_on_close = false
 
 class UC extends \BaseController {
-	public function login($id=34){
+	public function login($id=30){
 		$user=User::find($id);
-		if($id==34)return Config::get('debug.login');
+		if($id==30)return Config::get('debug.login');
 		if($user)Auth::user()->login($user);
 		else return "try another id.";
 	}
@@ -63,6 +63,10 @@ class UC extends \BaseController {
 	    	if($char->decay)$decay = $char->decay;
 		    	else $decay=100; // THIS SHOULD NEVER HAPPEN
 		    	
+///PUT FUNCTIONS TO UPDATE GT FT ET of user stuff deps on user type
+		    	//Make sure to change PRODUCT's being_funded = 0 after FT
+		    	//EVEN PUT THRESHOLD CHECKS HERE
+
 
 		    	$ctime=time();
 		    	if(!$user->prev_time){

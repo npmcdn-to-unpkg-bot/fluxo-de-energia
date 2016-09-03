@@ -26,57 +26,86 @@ class IC extends \BaseController {
 }
 
 
-public function check($investor,$input){
+
+public function buyFruit(){
+	//IMPLEMENT THIS AFTER createFruit by farmer
+}
+
+
+public function check($input){
 		//Life Energy price check
-		// FT positive check
+		// RFT positive check
 		// avl_shares check
-	if(!($input['num_shares']&& $input['product_id']))return false;
+		//investor id,bid_price, set at backend
 
-	$p=Product::find($input['product_id']); //other way is to reach thru saved $i
-	if(!$p)return false;
-	if(!$p->FT){echo "FT is over. ";return false;}
+	$user= Auth::user()->get();  //THIS CHECK MAYBE NOT REQ.//Get user again in case someone goes back and resends form data-
+	if($user->investor){ 
 
-	if($p->avl_shares < (int)$input['num_shares']){ echo "Insufficient shares. Try reducing number of shares. (".$p->avl_shares.")"; return false;}
-	else {
-		$p->avl_shares -= (int)($input['num_shares']);
-		$p->save();
-		$price= (int)($input['num_shares'])* (int)($p->bid_price);
+		$investor=$user->investor;
 
-			//REAL TIME THR <- repeated use. THis can go into game.php BUT EXP LATER
-		$gods=God::all()->sum('le');
-		$invs=Investor::all()->sum('le');
-		$farmers=Farmer::all()->sum('le');
-		$total=$gods+$invs+$farmers;
-		$facFI = Config::get('game.facFI');
+		if(!($input['num_shares']&& $input['product_id']))return false;
 
-		$LE=$investor->le;
+				$p=Product::find($input['product_id']); //other way is to reach thru saved $i
+				if(!$p){echo "prod not found";return false;}
+				if(!$p->being_funded){echo "Product is not being funded. <BR>";return false;}
+
+				$god=$p->god; //accessed to increase god LE
+				$ctime=time();
+				$time_passed = ($ctime - $p->time_when_created)/60;
+				
+				//show RFT also
+				$RFT = $p->FT - $time_passed; //Minutes
+				echo "RFT ".$p->FT." - ".$time_passed." = ".$RFT."<BR>";
+
+				if($RFT<=0){ //THIS SHOULD NOT COME
+					echo "RFT is over. ".$p->FT." - ".$ctime." = ".$RFT."<BR>";
+
+					return false;
+				}
+
+
+				if($p->avl_shares < (int)$input['num_shares']){ echo "Insufficient shares. Available shares(".$p->avl_shares.")"; return false;}
+				else {
+					$p->avl_shares -= (int)($input['num_shares']);						$p->save();
+					$num_shares = (int)($input['num_shares']);
+					$price= $num_shares * (int)($p->bid_price);
+
+
+						//REAL TIME THR 
+					$total=Config::get('game.sysLE'); //CHECK IF THIS WORKS ALL TIME
+					$facFI = Config::get('game.facFI');
+
+					$LE=$investor->le;
 			$THR= $facFI* $total; //this factor may depend on number of users ?!
 
 			if($LE - $price > $THR)
 			{
-				$investor->le -= $price;
-				$investor->save();
+				$investor->le -= $price;				$investor->save();
+					//GIVE BACK decay LE to God
+				$excess_bid = $p->bid_price - $p->unit_price;
+				$godReturns = Config::get('game.godReturns');
+				$god->le += $godReturns*$num_shares*$excess_bid; 					$god->save();
 				return true;
 			}
 			else {echo $THR." >  ".$LE."-".$price." - > Insufficient LE. ";return false;}
 		}
 	}
+	else echo "Don't play fool with me !"; //Should not reach here . 
+}
 
 
-
-
-
-	public function makeInvestment(){
+//BID PRICE -> return LE part to god
+public function makeInvestment(){
 		//from POST request by Investor
-		$input = Input::except('_token');
-		$user= Auth::user()->get();
+	$input = Input::except('_token');
+	$user= Auth::user()->get();
 		//investor id,bid_price, set at backend
 
-		if($user->investor){
-			$investor=$user->investor;
-			echo "Current LE = ".$investor->le."<BR>";
+	if($user->category=='investor'){
+		$investor=$user->investor;
+		echo "Current LE = ".$investor->le."<BR>";
 
-			if($this->check($investor,$input)){ //THIS WILL ALREADY REDUCE LE, make sure the product gets Added
+			if($this->check($input)){ //THIS WILL ALREADY REDUCE LE, make sure the product gets Added
 				$i=new Investment();
 				$i->investor_id = $investor->id;
 				$p=Product::find($input['product_id']); //other way is to reach thru saved $i
@@ -87,10 +116,13 @@ public function check($investor,$input){
 					if($i->$field)echo " added.";echo "<br>";			
 				}
 				$i->save();	
+
 				echo "Success. Now LE = ".$investor->le;
 			}
 			else echo "<BR>Transaction failed. ";
 		}
+		else echo " Not Investor. Don't play fool with me !";
+
 	} 
 	
 	public function makeInvestmentForm(){
@@ -99,6 +131,9 @@ public function check($investor,$input){
 		if($user->category=='investor'){
 			return View::make('invest')->with('user',$user);
 		}
-		else return "You are not Investor!";
+		else return "You are not Investor! -".$user->username;
 	} 
+
+
 }	
+

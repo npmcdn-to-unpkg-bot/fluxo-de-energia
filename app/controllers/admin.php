@@ -3,8 +3,10 @@
 
 //USER MIDDLEWARE for checking it is a farmer & all.
 
+
 class admin extends \BaseController {
 //CALL THIS FUNCTION EVERY 30MIN OR SO => To avoid Stucks
+//MOVE THE FUNCTION BELOW TO SQL functions in Workbench
 	public function boostLE(){
 		$user=Auth::user()->get();
 		if($user->id == 42){
@@ -30,7 +32,9 @@ class admin extends \BaseController {
 	}
 
 }
+
 #*** 		EACH FUNCTION SHALL ADD AN IF CONDN TO CHECK IF USER IS GOD/FARMER/INV
+
 //USER MIDDLEWARE for checking it is a farmer & all.
 
 #*** Admin Panel REQUIRED => the decay/FT/ET will still go on due to timestamp stuff in case server stops !
@@ -38,7 +42,7 @@ class admin extends \BaseController {
 
 		    	// ->> CHANGED THIS to saving a column in user database.
 #Target -
-// ->DISCARD # Sessions - done => stored user_id & active character
+// ->DISCARDED # Sessions - done => stored user_id & active character
 # decayHandle - Done
 # thresholdHandle -Done
 # >Make forms for Product class  (exclude necessary paras) -Done
@@ -46,10 +50,11 @@ class admin extends \BaseController {
 # >Makeinvestment function. - Done, but not debugged for complex
 
 # >Make similar for fruit price setting
+# > buy fruit
 
-#ajax for Decay & LE  - Done => but updates shown only at home page. We need it AT EVERY PAGE THEY ARE ON.
+#ajax for Decay & LE  - Done => but We need it AT EVERY PAGE THEY ARE ON currently  updates shown only at home page. .
 
-# >Ajax for bid price !	
+# >Ajax for bid price? -> IMPLEMENT NOW 	
 #> Ajax to update FT & GT. also do this inside makeInvestment
 # >Ajax  CHANGING CHARACTER THR Check   
 
