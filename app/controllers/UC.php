@@ -66,7 +66,7 @@ class UC extends \BaseController {
 		$products = $user->god->products()->where('being_funded',0)->get();
 		foreach ($products as $product) {			
 			$expiry = $product->ET;
-			$time_elapsed = time() - strtotime($product->launched_at);
+			$time_elapsed = time() -  $product->launched_at;
 			if($time_elapsed >= $expiry*60){
 				$category = $product->category;
 				$specific = $product->{$category}->delete();
