@@ -8,7 +8,7 @@ setInterval(function(){
 	$.ajax({
   method: "POST",
   url: "{{ route('decayHandle') }}",
-  data: { 'name': "Johnny", 'location': "Boston" },
+  // data: { 'name': "Johnny", 'location': "Boston" },
   
   success: function( le ) {
   	console.log("decay");
@@ -25,7 +25,7 @@ setInterval(function(){
   $.ajax({
   method: "POST",
   url: "{{ route('thresholdHandle') }}",
-  data: { 'name': "Johnny", 'location': "Boston" },
+  // data: { 'name': "Johnny", 'location': "Boston" },
 })
   .success(function( data ) {
     console.log("sys");

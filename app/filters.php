@@ -40,18 +40,47 @@ Route::filter('no-cache',function($route, $request, $response){
 |
 */
 
-Route::filter('auth.user', function() {
-    if (Auth::user()->guest()) {
-        return Redirect::guest('misc/login');
+//GOod-
+Route::filter('user', function() {
+    $user= Auth::user()->get();
+    if (!$user || !$user->category) {
+        return "Please Log in ";
     }
+});
+
+Route::filter('god', function() {
+    $user= Auth::user()->get();
+    if (!($user->god && $user->category=='god')) {
+        return "Not allowed. ".$user->username." ".$user->category ;
+    }
+    $total=User::all()->sum('le');
+    $facGI = Config::get('game.facGI');
+    if($user->le < $facGI* $total)return "Low LE, should transform.".$user->le." < ".$facGI* $total ;
+
+
 });
 
 Route::filter('investor', function() {
     $user= Auth::user()->get();
-    if ($user->category!='investor') {
-        return "Not allowed";
+    if (!($user->investor && $user->category=='investor')) {
+        return "Not allowed. ".$user->username." ".$user->category ;
     }
+    $total=User::all()->sum('le');
+    $facFI = Config::get('game.facFI');
+    if($user->le < $facFI* $total)return "Low LE, should transform.";
+
 });
+
+Route::filter('farmer', function() {
+    $user= Auth::user()->get();
+    if (!($user->farmer && $user->category=='farmer')) {
+        return "Not allowed. ".$user->username." ".$user->category ;
+    }
+    $total=User::all()->sum('le');
+    $facF = Config::get('game.facF');
+    if($user->le < $facF* $total)return "Low LE, should wait.";
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +95,14 @@ Route::filter('investor', function() {
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+    if (Auth::check()) return Redirect::to('/');
 });
 
+Route::filter('auth.user', function() {
+    if (Auth::user()->guest()) {
+        return Redirect::guest('misc/login');
+    }
+});
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter
@@ -82,8 +116,8 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+    if (Session::token() != Input::get('_token'))
+    {
+      throw new Illuminate\Session\TokenMismatchException;
+  }
 });
