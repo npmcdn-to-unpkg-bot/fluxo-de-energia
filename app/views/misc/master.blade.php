@@ -52,7 +52,7 @@
 <script src="{{asset('bootstrap_site/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('bootstrap_site/js/main.js')}}"></script>
 <script src="{{asset('bootstrap_site/js/jquery.prettyPhoto.js')}}"></script>
-<script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
+<script src="https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 
 @yield('script')
 
